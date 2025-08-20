@@ -42,14 +42,23 @@
         font-weight: 600;
         cursor: pointer;
       }
+      .version{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
       button:hover { background: #1d4ed8; }
       button:active { background: #1e40af; }
     </style>
   </head>
-  <body>
+  <body>  
     <div class="card">
+      <div class="version">
+        <h3>Current version : 1.0.1</h3>
+        <h3>Latest version : 1.0.2</h3>
+      </div>
       <h1>Download your file</h1>
-      <p>Click the button to download the static file from this project.</p>
+      <p>Click the button to download the Latest App.</p>
       <button id="downloadBtn" type="button">Download file</button>
     </div>
 
@@ -58,7 +67,7 @@
         var button = document.getElementById('downloadBtn');
         button.addEventListener('click', function () {
           // Path to the static file within the project
-          var filePath = 'static/newTesting.apk';
+          var filePath = 'static/1.0.2.apk';
 
           var link = document.createElement('a');
           link.href = filePath;
