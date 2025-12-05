@@ -67,8 +67,8 @@
         
       </div>
       <div class="version">
-        <h3>Current version : 1.0.7</h3>
-        <h3>Latest version : 1.0.8</h3>
+        <h3>Current version : 1.0.0</h3>
+        <h3>Latest version : 2.0.8</h3>
       </div>
       <h1>Download your file</h1>
       <p>Click the button to download the MsCApp Latest App.</p>
@@ -80,11 +80,12 @@
         var button = document.getElementById('downloadBtn');
         button.addEventListener('click', function () {
           // Path to the static file within the project
-          var filePath = 'static/1.0.8.apk';
+          var filePath = 'static/2.0.8.apk';
 
           var link = document.createElement('a');
           link.href = filePath;
           link.download = 'msc';
+          console.log(filePath);
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
