@@ -1,97 +1,425 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title> MsC App</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESS App - Download</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-      body {
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #f7f7f8;
-      }
-      .logo-container {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-      }
-      .card {
-        background: #fff;
-        padding: 24px;
-        border-radius: 12px;
-        box-shadow: 0 6px 24px rgba(0,0,0,0.06);
-        width: 100%;
-        max-width: 420px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
         
-      }
-      h1 {
-        margin: 0 0 12px;
-        font-size: 20px;
-      }
-      p {
-        margin: 0 0 20px;
-        color: #555;
-      }
-      button {
-        display: inline-block;
-        padding: 10px 16px;
-        border-radius: 8px;
-        border: none;
-        background: #2563eb;
-        color: #fff;
-        font-weight: 600;
-        cursor: pointer;
-      }
-      .version{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-      }
-      button:hover { background: #1d4ed8; }
-      button:active { background: #1e40af; }
+        body {
+            background-color: #f7f7f8;
+            color: #333;
+            line-height: 1.5;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        
+        /* App Header */
+        .app-header {
+            background: linear-gradient(135deg, #10b981 0%, #6a85ce 100%);
+            color: white;
+            border-radius: 16px 16px 0 0;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+        
+        .app-title-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            color: #2563eb;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .app-title {
+            flex: 1;
+        }
+        
+        .app-name {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .app-developer {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .app-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* App Content */
+        .app-content {
+            background: white;
+            border-radius: 0 0 16px 16px;
+            padding: 24px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #111;
+        }
+        
+        .about-section {
+            margin-bottom: 24px;
+        }
+        
+        .about-text {
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .feature-list i {
+            color: #2563eb;
+            margin-right: 12px;
+            margin-top: 2px;
+            font-size: 14px;
+        }
+        
+        .version-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .version-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .version-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+        
+        .version-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        
+        .version-number.latest {
+            color: #10b981;
+        }
+        
+        .divider {
+            width: 1px;
+            height: 40px;
+            background: #e5e7eb;
+        }
+        
+        /* Download Button */
+        .download-section {
+            text-align: center;
+        }
+        
+        .download-btn {
+            background: linear-gradient(to right, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            margin-bottom: 16px;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+        }
+        
+        .download-btn:active {
+            transform: translateY(0);
+        }
+        
+        .download-btn i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .download-size {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        /* Data Safety Section */
+        .data-safety {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .data-safety-title {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #111;
+        }
+        
+        .data-safety-title i {
+            margin-right: 10px;
+            color: #2563eb;
+        }
+        
+        .data-safety-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+        }
+        
+        .app-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 12px;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .stat-value {
+            font-weight: 700;
+            color: #2563eb;
+            font-size: 18px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 500px) {
+            .app-header, .app-content {
+                padding: 20px;
+            }
+            
+            .app-name {
+                font-size: 20px;
+            }
+            
+            .version-number {
+                font-size: 16px;
+            }
+        }
     </style>
-  </head>
-  <body>  
-    <div class="card">
-      <div class="logo-container">
-        <div><img src="ic_launcher.png" alt="logo" width="70" height="50"></div>
-        <div>
-          <div><b>MsC App</b></div>
-          <div><b>MsCorpres Automation Private Limited</b></div>
+</head>
+<body>
+    <div class="container">
+        <div class="app-header">
+            <div class="app-title-row">
+                <div class="app-icon"><img src="./ic_launcher.png" alt="MsC App Icon" style="width: 40px; height: 40px;"></div>
+                <div class="app-title">
+                    <div class="app-name">MsC App</div>
+                    <div class="app-developer">MsCorpres Automation Private Limited</div>
+                </div>
+            </div>
+            
+            <p class="about-text">The MSC app captures and extracts data, and scans barcodes and QR codes.</p>
+            
+            <div class="app-badges">
+                <span class="badge">Productivity</span>
+                <span class="badge">Business</span>
+                <span class="badge">Timesheets</span>
+            </div>
         </div>
-        
-      </div>
-      <div class="version">
-        <h3>Current version : 1.0.7</h3>
-        <h3>Latest version : 2.0.8</h3>
-      </div>
-      <h1>Download your file</h1>
-      <p>Click the button to download the MsCApp Latest App.</p>
-      <button id="downloadBtn" type="button">Update</button>
+        <div class="app-content">
+            
+            
+            <div class="version-info">
+                <div class="version-item">
+                    <div class="version-label">Current Version</div>
+                    <div class="version-number">1.0.9</div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="version-item">
+                    <div class="version-label">Latest Version</div>
+                    <div class="version-number latest">2.0.8</div>
+                </div>
+            </div>
+            
+            <div class="download-section">
+                <button class="download-btn" >
+                    <i class="fas fa-download"></i> <a href="https://window.mscorpres.com/software/MobileApp/MsC.apk" style="color: white; text-decoration: none;">Download APK</a>
+                </button>
+            </div>
+            
+           
+            <div class="about-section">
+                <h3 class="section-title">About this app</h3>
+                <p class="about-text">This MsC application is used to capture and extract data, including barcode and QR code scanning.</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> Device and SIM Utilities</li>
+                    <li><i class="fas fa-check-circle"></i> Capture Image Module</li>
+                    <li><i class="fas fa-check-circle"></i> SIM Number Extract</li>
+                    <li><i class="fas fa-check-circle"></i> Payswif</li>
+                    <li><i class="fas fa-check-circle"></i> SIM Number Update Module</li>
+                </ul>
+            </div>
+             <div class="data-safety">
+                <h3 class="data-safety-title">
+                    <i class="fas fa-shield-alt"></i> Data Safety
+                </h3>
+                <p class="data-safety-text">This app collects and uses your data to provide core functionality. Your data is encrypted and never shared with third parties without your consent. <a href="#" style="color: #2563eb; text-decoration: none;">Learn more about data safety</a>.</p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>MsCorpres Automation Private Limited. All rights reserved.</p>
+        </div>
     </div>
 
-    <script>          
-      (function () {
+    <!-- <script>
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            // Create a fake download simulation
+            const btn = this;
+            const originalText = btn.innerHTML;
+            
+            // Change button text to show downloading
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+            btn.disabled = true;
+        
+            setTimeout(() => {
+              
+                const link = document.createElement('a');
+                link.href = 'https://window.mscorpres.com/software/MobileApp/MsC.apk'; // In real scenario: 'static/2.0.0.apk'
+                // link.download = 'ESS_App_2.0.0.apk';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                btn.innerHTML = '<i class="fas fa-check"></i> Download Complete!';
+                btn.style.background = 'linear-gradient(to right, #10b981, #059669)';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    btn.style.background = 'linear-gradient(to right, #2563eb, #1d4ed8)';
+                }, 3000);
+                
+            }, 1500); // Simulate 1.5 second download time
+        });
+        
+        // Add interaction to badges
+        document.querySelectorAll('.badge').forEach(badge => {
+            badge.addEventListener('click', function() {
+                const badgeText = this.textContent;
+                alert(`You clicked on: ${badgeText}`);
+            });
+        });
+        (function () {
         var button = document.getElementById('downloadBtn');
         button.addEventListener('click', function () {
           // Path to the static file within the project
-          var filePath = 'static/2.0.8.apk';
+          var filePath = 'static/2.0.0.apk';
 
           var link = document.createElement('a');
           link.href = filePath;
-          link.download = 'msc';
-          console.log(filePath);
+          link.download = 'ESS App';
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
         });
-      })();
-    </script>
-  </body>
-  </html>
+      }
+    )();
+    </script> -->
 
+</body>
+</html>
